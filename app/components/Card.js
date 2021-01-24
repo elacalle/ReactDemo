@@ -12,9 +12,13 @@ export default function Card({header, score, avatar_url, login, html_url, childr
         src={avatar_url}
         alt={`Avatar for ${login}`}
       />
-      <h4 className='center-text'>
-        Score: {score.toLocaleString()}
-      </h4>
+      {
+        score && (
+          <h4 className='center-text'>
+            Score: {score.toLocaleString()}
+          </h4>
+        )
+      }
       <h2 className='center-text'>
         <a className='link' href={html_url}>
           {login}
