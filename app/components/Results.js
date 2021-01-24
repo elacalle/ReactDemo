@@ -8,12 +8,12 @@ import { FaCompass, FaBriefcase, FaUsers, FaUserFriends, FaCode, FaUser } from '
 function ProfileList({name, location, company, followers, following}) {
   return (
     <ul className='card-list'>
-      <Tooltip text="User name">
-        <li>
-          <FaUser color='rgb(239, 115, 115)' size={22} />
-          {name}
-        </li>
-      </Tooltip>
+        <Tooltip text="test">
+          <li>
+            <FaUser color='rgb(239, 115, 115)' size={22} />
+            {name}
+          </li>
+        </Tooltip>
       {location && (
         <li>
           <FaCompass color='rgb(144, 115, 255)' size={22} />

@@ -19,9 +19,9 @@ export default class Loading extends React.Component {
     }
   }
   componentDidMount() {
-    setInterval(() => {
-      const {text} = this.props;
+    const {text} = this.props;
 
+    this.interval = setInterval(()=>{
       if(this.state.text === `${text}...`) {
         this.setState({
           text
@@ -31,7 +31,10 @@ export default class Loading extends React.Component {
           text: `${state.text}.`
         }))
       }
-    }, 100)
+    }, 50)
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
   render() {
     const {text} = this.state;
