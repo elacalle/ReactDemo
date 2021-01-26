@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import Results from './Results';
 import { FaUserFriends, FaFighterJet, FaTrophy, FaTimesCircle } from 'react-icons/fa'
 import {ThemeConsumer} from './../contexts/theme'
-
+import {
+  Link,
+} from 'react-router-dom'
 
 function Instructions() {
   return (
@@ -195,14 +197,9 @@ export default class Battle extends React.Component {
         }
 
         {player1 && player2 && (
-          <button 
-          className='btn dark-btn btn-space' onClick={() => {
-            this.setState({
-              battle: true,
-            })
-          }}>
+          <Link className="btn dark-btn btn-space" to={`/results?player1=${player1}&player2=${player2}`}>
             Battle
-          </button>
+          </Link>
         )}
         </div>
         </div>

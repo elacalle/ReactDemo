@@ -1,10 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Popular from './components/Popular'
-import Battle from './components/Battle'
+import Loading from './components/Loading'
 import Nav from './components/Nav'
+const Popular = React.lazy(() => {  return import('./components/Popular'); })
+const Battle = React.lazy(() => { return import('./components/Battle'); });
+const Results = React.lazy(() => { return import('./components/Results'); });
 import {ThemeProvider} from './contexts/theme'
 import './index.css'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom'
 
 class App extends React.Component {
   constructor(props) {
@@ -22,13 +29,26 @@ class App extends React.Component {
   render() {
     return (
         <ThemeProvider value={this.state}>
-          <div className={this.state.theme}>
-            <div className="container">
-              <Nav />
-
-              <Battle />
-            </div>
-          </div>
+          <React.Suspense fallback={<Loading/>}>
+            <Router>
+              <div className={this.state.theme}>
+                <div className="container">
+                  <Nav />
+                  <Switch>
+                    <Route exact path="/">
+                      <Popular/>
+                    </Route>
+                    <Route path="/battle">
+                      <Battle/>
+                    </Route>
+                    <Route path="/results">
+                      <Results />
+                    </Route>
+                  </Switch>
+                </div>
+              </div>
+            </Router>
+          </React.Suspense>
         </ThemeProvider>
     );
   }

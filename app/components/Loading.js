@@ -1,12 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-
 const stlye = {
   fontSize: '32px',
   fontWeight: 'bold'
 }
-
 
 export default class Loading extends React.Component {
   constructor(props) {
@@ -31,7 +29,7 @@ export default class Loading extends React.Component {
           text: `${state.text}.`
         }))
       }
-    }, 50)
+    }, 500)
   }
   componentWillUnmount() {
     clearInterval(this.interval)

@@ -3,6 +3,7 @@ import {battle} from './../services/api.js'
 import Card from './Card'
 import Loading from './Loading'
 import Tooltip from './Tooltip'
+import { withRouter } from "react-router";
 import { FaCompass, FaBriefcase, FaUsers, FaUserFriends, FaCode, FaUser } from 'react-icons/fa'
 
 function ProfileList({name, location, company, followers, following}) {
@@ -38,7 +39,7 @@ function ProfileList({name, location, company, followers, following}) {
   )
 }
 
-export default class Battle extends React.Component {
+const battleComponent = class Battle extends React.Component {
   constructor(props) {
     super(props)
 
@@ -50,10 +51,10 @@ export default class Battle extends React.Component {
     }
   }
   async componentDidMount() {
-    const { player1, player2} = this.props;
-    
+    const url = new URLSearchParams(this.props.location.search)
+
     try{
-      const [winner, loser] = await battle(player1, player2);
+      const [winner, loser] = await battle(url.get('player1'), url.get('player2'))
 
       this.setState({
         winner,
@@ -109,3 +110,5 @@ export default class Battle extends React.Component {
     )   
   }
 }
+
+export default withRouter(battleComponent);
